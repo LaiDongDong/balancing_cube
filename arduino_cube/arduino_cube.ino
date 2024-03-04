@@ -99,7 +99,7 @@ void loop() {
   if (currentT - previousT_2 >= 2000) {    
     battVoltage((double)analogRead(VBAT) / bat_divider); // 读取电池电压并显示在串口上
     if (!calibrated && !calibrating) { // 如果未校准且未进行校准，则提示用户先进行校准
-      Serial.println("first you need to calibrate the balancing points...");
+      // Serial.println("first you need to calibrate the balancing points...");
     }
     previousT_2 = currentT; // 更新上一次电池电压检测的时间
   }

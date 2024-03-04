@@ -1,4 +1,4 @@
- void writeTo(byte device, byte address, byte value) {
+void writeTo(byte device, byte address, byte value) {
   // 向设备写入数据
   Wire.beginTransmission(device); // 开始与设备的通信
   Wire.write(address); // 写入地址
@@ -81,31 +81,25 @@ void angle_calc() {
   Acc_angleY = atan2(-AcZ, AcX) * 57.2958; // 计算加速度计在Y轴上的角度
   robot_angleY = robot_angleY * Gyro_amount + Acc_angleY * (1.0 - Gyro_amount); // 结合陀螺仪和加速度计的角度计算机器人在Y轴上的角度
 
-  //调试用代码，3维站立
-  Serial.print("AngleX: "); Serial.print(robot_angleX); Serial.print(" AngleY: "); Serial.println(robot_angleY);
-  
   angleX = robot_angleX; // 更新角度X的值
   angleY = robot_angleY; // 更新角度Y的值
 
-  //调试用代码，2维度站立
-  // Serial.print("AngleX: "); Serial.print(angleX); Serial.print(" AngleY: "); Serial.println(angleY);
-
   if (abs(angleX - offsets.X1) < 0.4 && abs(angleY - offsets.Y1) < 0.4) { // 如果角度接近第一个顶点
     balancing_point = 1; // 设置平衡点为1
-    // if (!vertical) beep(); // 如果机器人没有垂直站立，则调用beep函数
-    // vertical = true; // 设置机器人垂直站立状态为true
+    if (!vertical) beep(); // 如果机器人没有垂直站立，则调用beep函数
+    vertical = true; // 设置机器人垂直站立状态为true
   } else if (abs(angleX - offsets.X2) < 3 && abs(angleY - offsets.Y2) < 0.6) { // 如果角度接近第二个顶点
     balancing_point = 2; // 设置平衡点为2
-    // if (!vertical) beep(); // 如果机器人没有垂直站立，则调用beep函数
-    // vertical = true; // 设置机器人垂直站立状态为true
+    if (!vertical) beep(); // 如果机器人没有垂直站立，则调用beep函数
+    vertical = true; // 设置机器人垂直站立状态为true
   } else if (abs(angleX - offsets.X3) < 6 && abs(angleY - offsets.Y3) < 0.6) { // 如果角度接近第三个顶点
     balancing_point = 3; // 设置平衡点为3
-    // if (!vertical) beep(); // 如果机器人没有垂直站立，则调用beep函数
+    if (!vertical) beep(); // 如果机器人没有垂直站立，则调用beep函数
     vertical = true; // 设置机器人垂直站立状态为true
   } else if (abs(angleX - offsets.X4) < 0.6 && abs(angleY - offsets.Y4) < 3) { // 如果角度接近第四个顶点
     balancing_point = 4; // 设置平衡点为4
-    // if (!vertical) beep(); // 如果机器人没有垂直站立，则调用beep函数
-    // vertical = true; // 设置机器人垂直站立状态为true
+    if (!vertical) beep(); // 如果机器人没有垂直站立，则调用beep函数
+    vertical = true; // 设置机器人垂直站立状态为true
   }
 }
 
