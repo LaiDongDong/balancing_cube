@@ -53,7 +53,7 @@ OffsetsObj offsets; // 定义一个OffsetsObj类型的变量offsets
 
 float alpha = 0.6; // 定义alpha为0.6
 
-int16_t  AcX, AcY, AcZ, GyY, GyZ, gyroX, gyroY, gyroZ, gyroYfilt, gyroZfilt; // 定义多个整型变量用于存储加速度计和陀螺仪的数据
+int16_t  AcX, AcY, AcZ, GyX, GyY, GyZ, gyroX, gyroY, gyroZ, gyroYfilt, gyroZfilt; // 定义多个整型变量用于存储加速度计和陀螺仪的数据
 
 int16_t  GyZ_offset = 0; // 定义GyZ_offset为0
 int16_t  GyY_offset = 0; // 定义GyY_offset为0

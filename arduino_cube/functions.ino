@@ -37,7 +37,8 @@ void angle_setup() {
     GyZ_offset_sum += GyZ; // 累加GyZ的值
     delay(3); // 延时3毫秒
   }
-  GyZ_offset = GyZ_offset_sum >> 10; // 计算GyZ的偏移量
+  GyZ_offset = GyZ_offset_sum >> 10; // 计算GyZ的偏移量,循环计算1024次累计值，再用位计算做一个1024的整除
+
   Serial.print("GyZ offset value = "); Serial.println(GyZ_offset); // 输出GyZ的偏移量
   beep(); // 调用beep函数
   
@@ -59,6 +60,7 @@ void angle_calc() {
   Wire.write(0x45); // 写入0x45（GYRO_YOUT_H）和0x46（GYRO_YOUT_L）寄存器的地址
   Wire.endTransmission(false); // 结束通信
   Wire.requestFrom(MPU6050, 6, true);  // 请求6个字节的数据，从MPU6050的0x45和0x46寄存器开始
+  //To do: add GyX
   GyY = Wire.read() << 8 | Wire.read(); // 读取GyY的值
   GyZ = Wire.read() << 8 | Wire.read(); // 读取GyZ的值
 
